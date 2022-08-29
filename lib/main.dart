@@ -8,9 +8,7 @@ void main() {
         backgroundColor: Colors.red,
         appBar: AppBar(
           title: Center(
-              child: Text(
-                  'Dicee'
-              ),
+            child: Text('Dicee'),
           ),
           backgroundColor: Colors.red,
         ),
@@ -21,7 +19,6 @@ void main() {
 }
 
 class DicePage extends StatefulWidget {
-
   @override
   State<DicePage> createState() => _DicePageState();
 }
@@ -29,21 +26,23 @@ class DicePage extends StatefulWidget {
 class _DicePageState extends State<DicePage> {
   int leftDiceNumber = 6;
   int rightDiceNumber = 5;
+
+  void changeDiceFace() {
+    setState(() {
+      leftDiceNumber = Random().nextInt(6) + 1;
+      rightDiceNumber = Random().nextInt(6) + 1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-
     return Center(
       child: Row(
         children: [
           Expanded(
             child: TextButton(
-              onPressed: (){
-                setState(() {
-                  leftDiceNumber = Random().nextInt(6)+1;
-                  rightDiceNumber = Random().nextInt(6)+1;
-                  print('leftDiceNumber = $leftDiceNumber');
-                });
-
+              onPressed: () {
+                changeDiceFace();
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -56,17 +55,11 @@ class _DicePageState extends State<DicePage> {
           Expanded(
             child: TextButton(
               onPressed: () {
-                setState(() {
-                  leftDiceNumber = Random().nextInt(6)+1;
-                  rightDiceNumber = Random().nextInt(6)+1;
-                  print('RightDiceNumber = $rightDiceNumber');
-                });
+                changeDiceFace();
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Image.asset(
-                    'images/dice$rightDiceNumber.png'
-                ),
+                child: Image.asset('images/dice$rightDiceNumber.png'),
               ),
             ),
           ),
@@ -74,5 +67,4 @@ class _DicePageState extends State<DicePage> {
       ),
     );
   }
-  }
-
+}
